@@ -48,6 +48,7 @@ select {
   background: #212121;
   font-family: "Rubik", sans-serif;
   height: 100vh;
+  overflow: hidden;
 }
 
 .land__header {
@@ -136,22 +137,22 @@ select {
 }
 @media (max-width: 768px) {
   .land__header-item-title {
-    font-size: 22px;
+    font-size: 32px;
   }
 }
 @media (max-width: 600px) {
   .land__header-item-title {
-    font-size: 18px;
+    font-size: 32px;
   }
 }
 @media (max-width: 480px) {
   .land__header-item-title {
-    font-size: 20px;
+    font-size: 30px;
   }
 }
 @media (max-width: 400px) {
   .land__header-item-title {
-    font-size: 15px;
+    font-size: 25px;
   }
 }
 
@@ -189,7 +190,7 @@ select {
 }
 @media (max-width: 480px) {
   .land__header-item-desc {
-    font-size: 18px;
+    font-size: 22px;
   }
 }
 
@@ -466,20 +467,22 @@ select {
 }
 @media (max-width: 550px) {
   .frame-animation {
-    -webkit-transform: scale(2.1);
-            transform: scale(2.1);
+    -webkit-transform: scale(1.8);
+            transform: scale(1.8);
     margin-bottom: 30%;
   }
 }
 @media (max-width: 450px) {
   .frame-animation {
+    -webkit-transform: scale(2.1);
+            transform: scale(2.1);
     margin-bottom: 40%;
   }
 }
 @media (max-width: 400px) {
   .frame-animation {
-    -webkit-transform: scale(2);
-            transform: scale(2);
+    -webkit-transform: scale(2.6);
+            transform: scale(2.6);
   }
 }
 
@@ -693,7 +696,7 @@ select {
 }
 @media (max-width: 850px) {
   .land__header .land__header-main-item {
-    margin-top: 25px;
+    margin-top: 55px;
   }
 }
 .land__btn_sing_up {
@@ -741,19 +744,18 @@ select {
   bottom: 0;
   -webkit-transform: scale(1.35) translateX(-100%);
           transform: scale(1.35) translateX(-100%);
-  z-index: 4; /* Выше чем Panda */
+  z-index: 4;
 }
 
-/* Стили для изображения Panda (нижнее и правее) */
 .land__panda_img {
   position: relative;
-  left: -30%; /* На 10% правее чем Zeus (15% + 10%) */
+  left: -30%;
   bottom: 0;
   -webkit-transform: scale(1.2) translateX(-100%);
-          transform: scale(1.2) translateX(-100%); /* Меньше масштаб */
-  z-index: 3; /* Ниже чем Zeus */
+          transform: scale(1.2) translateX(-100%);
+  z-index: 3;
   -webkit-transition-delay: 0.2s;
-          transition-delay: 0.2s; /* Небольшая задержка анимации */
+          transition-delay: 0.2s;
 }
 
 .loaded .land__header-left-item:not(.land__panda_img) {
@@ -767,15 +769,13 @@ select {
 }
 
 @media (max-width: 768px) {
-  /* Стили для изображения Zeus (верхнее) */
   .land__header-left-item:not(.land__panda_img) {
     -webkit-transform: scale(2.55) translateX(-100%);
             transform: scale(2.55) translateX(-100%);
   }
-  /* Стили для изображения Panda (нижнее и правее) */
   .land__panda_img {
     -webkit-transform: scale(2.4) translateX(-100%);
-            transform: scale(2.4) translateX(-100%); /* Меньше масштаб */
+            transform: scale(2.4) translateX(-100%);
   }
   .loaded .land__header-left-item:not(.land__panda_img) {
     -webkit-transform: scale(2.55) translateX(0);
@@ -784,5 +784,23 @@ select {
   .loaded .land__panda_img {
     -webkit-transform: scale(2.4) translateX(0);
             transform: scale(2.4) translateX(0);
+  }
+}
+@media (max-width: 450px) {
+  .land__header-left-item:not(.land__panda_img) {
+    -webkit-transform: scale(4.55) translateX(-100%);
+            transform: scale(4.55) translateX(-100%);
+  }
+  .loaded .land__header-left-item:not(.land__panda_img) {
+    -webkit-transform: scale(4.55) translateX(0);
+            transform: scale(4.55) translateX(0);
+  }
+  .land__panda_img {
+    -webkit-transform: scale(2.4) translateX(-100%);
+            transform: scale(2.4) translateX(-100%);
+  }
+  .loaded .land__panda_img {
+    -webkit-transform: scale(4.4) translateX(0);
+            transform: scale(4.4) translateX(0);
   }
 }
