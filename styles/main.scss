@@ -1,0 +1,14 @@
+// 1. Базовые стили
+@import 'reset/reset';
+@import 'fonts/fonts';
+
+// 2. Переменные
+@import 'variables/colors';
+@import 'variables/text';
+@import 'variables/numbers';
+
+// 3. Разметка
+@import 'layout/container';
+
+// 4. Компоненты
+@import 'components/button';

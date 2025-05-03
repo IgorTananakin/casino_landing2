@@ -1,0 +1,587 @@
+.land__container{
+    display: flex;
+    flex-direction: column;
+    background: $color-black;
+    font-family: 'Rubik', sans-serif;
+    height: 100vh;
+}
+.land__header{
+    display: flex;
+    flex-direction: row;
+}
+.land__header-item{
+    display: flex;
+    width: 25%;
+}
+.land__header-main-item{
+    display: flex;
+    width: 50%;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+.land__header-item-title {
+    font-size: $font-size0; 
+    color: $color-yellow;
+    font-weight: $font-weight1; 
+    font-family: $font-main; 
+    white-space: nowrap;
+
+    @media (max-width: 1900px) {
+      font-size: $font-size0_1; 
+    }
+    @media (max-width: 1800px) {
+        font-size: $font-size1; 
+      }
+    @media (max-width: 1600px) {
+      font-size: $font-size1_1; 
+    }
+    @media (max-width: 1350px) {
+      font-size: $font-size1_2; 
+    }
+    @media (max-width: 1300px) {
+      font-size: 35px; 
+    }
+    @media (max-width: 1200px) {
+      font-size: 32px; 
+    }
+    @media (max-width: 1100px) {
+        font-size: $font-size3_1; 
+      }
+    @media (max-width: 1000px) {
+      font-size: 28px; 
+    }
+    @media (max-width: 900px) {
+        font-size: 36px; 
+        }
+    @media (max-width: 768px) {
+      font-size: $font-size4_1; 
+    }
+    @media (max-width: 600px) {
+        font-size: $font-size4_2; 
+      }
+    @media (max-width: 480px) {
+      font-size: 20px; 
+    }
+    @media (max-width: 400px) {
+        font-size: $font-size5; 
+    }
+  }
+
+.land__header-item-desc {
+    font-size: $font-size2; 
+    color: $color-white;
+    font-weight: $font-weight1; 
+    font-family: $font-main; 
+    white-space: nowrap;
+    
+    @media (max-width: 1600px) {
+      font-size: $font-size3; 
+    }
+    @media (max-width: 1300px) {
+      font-size: 30px; 
+    }
+    @media (max-width: 1200px) {
+      font-size: 27px; 
+    }
+    @media (max-width: 1100px) {
+      font-size: 25px; 
+    }
+    @media (max-width: 768px) {
+      font-size: $font-size4_1; 
+    }
+    @media (max-width: 480px) {
+      font-size: $font-size4_2; 
+    }
+  }
+@media (max-width: 1100px) {
+  .loaded .land__animate_header_2{
+    gap: 0px;
+    padding-right: 2%;
+  }
+}
+@media (max-width: 950px) {
+  .loaded .land__animate_header_2{
+    padding-right: 0.4%;
+  }
+  .land__btn_sing_up{
+    margin-right: 5px; 
+    padding: 5px 10px;
+  }
+  .land__btn_reg{
+    margin-right: 5px;
+    padding: 5px 10px;
+  }
+}
+
+
+
+.slide-from-left {
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: transform 2.5s cubic-bezier(0.16, 1, 0.3, 1), 
+              opacity 2.5s ease;
+}
+
+.slide-from-right {
+  transform: translateX(100%);
+  opacity: 0;
+  transition: transform 2.5s cubic-bezier(0.16, 1, 0.3, 1), 
+              opacity 2.5s ease;
+}
+
+.loaded {
+  .slide-from-left,
+  .slide-from-right {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.land__header-item{
+    display: flex;
+    align-items: center;
+}
+.land__header-logo-item{
+    max-width: 50%;
+    max-height: 50%;
+}
+
+
+.land__header-left-item,
+.land__header-right-item {
+  
+  height: auto;
+  max-height: 90%;
+  object-fit: contain;
+  position: absolute;  
+  z-index: 3;
+  bottom: 0;           
+  left: 0;             
+  right: 0;            
+  margin: 0 auto;      
+  transform-origin: bottom center; 
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+.land__header-left-item {
+    width: auto;
+    height: auto;
+    max-height: none;
+    object-fit: contain;
+    transform: scale(1.51) translateX(-100%);
+    transform-origin: left bottom;
+    transition: transform 2.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                opacity 2.5s ease;
+    position: absolute;
+    left: 15%;
+    bottom: 0;
+    z-index: 3;
+    backface-visibility: hidden;
+    will-change: transform, opacity;
+  }
+  
+  .loaded .land__header-left-item {
+    transform: scale(1.51) translateX(0); 
+  }
+  .land__header-left-item .land__panda_img .slide-from-left{
+    left: -25%;
+  }
+.land__header-right-item {
+    width: auto; 
+    height: auto;
+    max-height: none; 
+    transform: scale(1.5) translateX(100%);
+    transform-origin: right bottom; 
+    transition: transform 2.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                opacity 2.5s ease;
+    
+    position: absolute;
+    right: 10%; 
+    bottom: 0;
+    z-index: 3;
+  }
+  .loaded .land__header-right-item {
+    transform: scale(1.5) translateX(0); 
+  }
+
+.land__header-left-item{
+    position: relative;
+    left: 10%; 
+    right: auto;
+}
+.land__header-logo-item {
+  position: relative;
+  left: 15%; 
+  right: auto;
+}
+
+.land__header-right-item {
+  left: auto;
+  right: 15%; 
+}
+
+@media (max-width: 768px) {
+  .land__header-left-item,
+  .land__header-right-item {
+    max-height: 80%;
+    
+  }
+  .loaded .land__header-left-item{
+    transform: scale(2.2) translateX(0);
+    left: 0;
+  }
+  .loaded .land__header-right-item{
+    transform: scale(3) translateX(0);
+    right: 0;
+  }
+  
+}
+
+@media (max-width: 480px) {
+  .loaded .land__header-left-item{
+    transform: scale(2.4) translateX(0);
+  }
+  .loaded .land__header-right-item{
+    transform: scale(3.2) translateX(0);
+    
+  }
+  .land__header-left-item,
+  .land__header-right-item {
+    max-height: 70%;
+  }
+}
+
+@media (max-width: 480px) {
+    .loaded .land__header-left-item{
+        transform: scale(2.6) translateX(0);
+    }
+    .loaded .land__header-right-item{
+        transform: scale(3.4) translateX(0); 
+    }
+}
+@media (max-width: 370px) {
+    .loaded .land__header-left-item{
+        transform: scale(2.8) translateX(0);
+    }
+    .loaded .land__header-right-item{
+        transform: scale(3.6) translateX(0); 
+    }
+}
+
+  
+  .land__main_section {
+    position: relative;
+    height: 100vh; 
+    min-height: 500px; 
+    overflow: hidden;
+    
+    @media (max-width: 1200px) {
+      min-height: 400px;
+    }
+    
+    @media (max-width: 768px) {
+      min-height: 300px;
+    }
+    
+    @media (max-width: 480px) {
+      min-height: 200px;
+    }
+  }
+  
+  .land_main-item {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .land__animate_2 {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $color-black; 
+  }
+  
+  .frame-animation {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+    @media (max-width: 1000px) {
+        margin-bottom: 10%;
+    }
+    @media (max-width: 850px) {
+        margin-bottom: 15%;
+        transform: scale(1.1);
+    }
+    @media (max-width: 650px) {
+        transform: scale(1.3);
+    }
+    @media (max-width: 550px) {
+        transform: scale(2.1);
+        margin-bottom: 30%;
+    }
+    @media (max-width: 450px) {
+        margin-bottom: 40%;
+    }
+    @media (max-width: 400px) {
+        transform: scale(2);
+    }
+  }
+
+  .land__animate_1,
+  .land__animate_3 {
+    position: absolute;
+    width: 25%;
+    height: 100%;
+    z-index: 2;
+    will-change: transform;
+    display: flex;
+    align-items: flex-end; 
+    justify-content: center;
+    overflow: visible; // Чтобы изображения не обрезались
+    padding-bottom: 20px; 
+  
+    @media (max-width: 768px) {
+      width: 15%;
+      padding-bottom: 15px;
+    }
+  }
+  
+  .land__animate_1 {
+    left: 0;
+    background: linear-gradient(90deg, $color-black, transparent);
+    transform: translateX(-100%);
+    justify-content: flex-start; 
+  }
+  
+  .land__animate_3 {
+    right: 0;
+    background: linear-gradient(270deg, $color-black, transparent);
+    transform: translateX(100%);
+    justify-content: flex-end; 
+  }
+  
+  .loaded .land__animate_1 {
+    transform: translateX(0);
+  }
+  
+  .loaded .land__animate_3 {
+    transform: translateX(0);
+  }
+
+  .land__animate_header_2 {
+    transform: translateX(100%);
+    opacity: 0;
+    transition: transform 2.5s cubic-bezier(0.16, 1, 0.3, 1), 
+                opacity 2.5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-right: 5%;
+  }
+  
+  .loaded .land__animate_header_2 {
+    transform: translateX(0);
+    opacity: 1;
+  }
+
+
+  @media (max-width: 768px) {
+    .land__header-left-item,
+    .land__header-right-item {
+      max-height: 80%;
+    }
+    
+    .land__animate_1 {
+      padding-left: 1%;
+    }
+    
+    .land__animate_3 {
+      padding-right: 1%;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .land__header-left-item,
+    .land__header-right-item {
+      max-height: 70%;
+    }
+  }
+
+  
+@media (max-width: 880px) {
+  .land__header {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+  }
+
+  /* Первый блок (лого) */
+  .land__animate_header_1 {
+    order: 1;
+    width: auto !important;
+    flex: 1;
+    display: flex;
+    justify-content: flex-start;
+    transform: translateX(-100%);
+    padding: 0;
+    margin: 0;
+  }
+
+  /* Центральный блок (заголовок) */
+  .land__header-main-item {
+    order: 3;
+    flex: 0 0 100%;
+    width: 100%;
+    text-align: center;
+    margin: 15px 0 0;
+    padding: 0;
+  }
+
+  /* Третий блок (кнопки) */
+  .land__animate_header_2 {
+    order: 2;
+    width: auto !important;
+    flex: 1;
+    display: flex;
+    justify-content: flex-end;
+    transform: translateX(100%);
+    padding: 0;
+    margin: 0;
+    gap: 8px;
+  }
+
+  /* Логотип */
+  .land__header-logo-item {
+    max-width: 80%;
+    margin-left: 0;
+  }
+
+  /* Анимация после загрузки */
+  .loaded {
+    .land__animate_header_1,
+    .land__animate_header_2 {
+      transform: translateX(0);
+    }
+  }
+
+  /* Кнопки */
+  .land__btn_sing_up,
+  .land__btn_reg {
+    padding: 5px 10px;
+    margin-right: 5px;
+    font-size: 14px;
+  }
+
+  .land__glob_img {
+    width: 24px;
+    height: 24px;
+  }
+  .land__header-logo-item{
+    max-width: 30%;
+  }
+
+}
+@media (max-width: 400px) {
+  .land__header-logo-item{
+    max-width: 40%;
+  }
+}
+
+    @media (max-width: 850px) {
+    .land__header {
+
+        .land__header-main-item {
+            margin-top: 25px;
+        }
+    }
+}
+
+
+
+
+.land__btn_sing_up{
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+}
+.land__btn_sing_up{
+  color: $color-white;
+  border: 1px solid $color-white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: $font-weight1;
+  padding: 5px 15px;
+  margin-right: 10px;
+}
+.land__btn_reg{
+  color: $color-black;
+  border: 1px solid $color-yellow;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: $font-weight1;
+  padding: 5px 15px;
+  margin-right: 10px;
+  background: $color-yellow;
+}
+.land__glob_img{
+  cursor: pointer;
+}
+
+/* Стили для изображения Zeus (верхнее) */
+.land__header-left-item:not(.land__panda_img) {
+  position: relative;
+  left: 0.4%;
+  bottom: 0;
+  transform: scale(1.35) translateX(-100%);
+  // margin-bottom: 10%; /* Отступ между Zeus и Panda */
+  z-index: 4; /* Выше чем Panda */
+
+  
+}
+
+/* Стили для изображения Panda (нижнее и правее) */
+.land__panda_img {
+  position: relative;
+  left: -30%; /* На 10% правее чем Zeus (15% + 10%) */
+  bottom: 0;
+  transform: scale(1.2) translateX(-100%); /* Меньше масштаб */
+  z-index: 3; /* Ниже чем Zeus */
+  transition-delay: 0.2s; /* Небольшая задержка анимации */
+}
+
+.loaded .land__header-left-item:not(.land__panda_img) {
+  transform: scale(1.35) translateX(0); 
+}
+
+.loaded .land__panda_img {
+  transform: scale(1.2) translateX(0);
+}
+@media (max-width: 768px) {
+    /* Стили для изображения Zeus (верхнее) */
+  .land__header-left-item:not(.land__panda_img) {
+    transform: scale(2.55) translateX(-100%);
+  }
+
+  /* Стили для изображения Panda (нижнее и правее) */
+  .land__panda_img {
+    transform: scale(2.4) translateX(-100%); /* Меньше масштаб */
+  }
+
+  .loaded .land__header-left-item:not(.land__panda_img) {
+    transform: scale(2.55) translateX(0); 
+  }
+
+  .loaded .land__panda_img {
+    transform: scale(2.4) translateX(0);
+  }
+}

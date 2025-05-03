@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Casino landing 1</title>
+    <link rel="stylesheet" href="styles/main.css?v=1">
+</head>
+<body>
+    <div class="land__container">
+        <div class="land__header">
+            <div class="land__header-item land__animate_header_1">
+                <img src="./media/img/circle/logo_casino.png" class="land__header-logo-item slide-from-left" alt="logo_casino">
+            </div>
+            <div class="land__header-main-item">
+                <div class="land__header-item-title">Бонус до 100% на депозит</div>
+                <div class="land__header-item-desc">Крути и выигрывай</div>
+            </div>
+            <div class="land__header-item land__animate_header_2">
+                <div class="land__btn_sing_up">Вход</div>
+                <div class="land__btn_reg">Регистрация</div>
+                <img src="./media/img/circle/globe.png" class="land__glob_img" alt="globe">
+            </div>
+        </div>
+        <div class="land__main_section">
+            <div class="land_main-item">
+                <div class="land__animate_1">
+                    <img src="./media/img/circle/zeus.png" class="land__header-left-item slide-from-left" alt="zeus">
+                    <img src="./media/img/circle/panda.png" class="land__header-left-item land__panda_img slide-from-left" alt="panda">
+                </div>
+                <div class="land__animate_2">
+                    <canvas class="frame-animation" 
+                    data-frames="wheel" 
+                    data-count="84"
+                    data-path="./media/img-optimized/"
+                    data-fps="24"
+                    data-loop="true"
+                    data-play-once="true"
+                    data-autoplay="true"></canvas>
+                </div>
+                <div class="land__animate_3">
+                    <img src="./media/img/circle/cat2.png" class="land__header-right-item slide-from-right" alt="cat">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/frame-animator.js?v=1"></script>
+    <script>
+        
+        // переводы
+        const translations = {
+          "ru": {
+            "bonus_title": "Бонус до 100% на депозит",
+            "bonus_subtitle": "Крути и выигрывай"
+          },
+          "en": {
+            "bonus_title": "100% deposit bonus",
+            "bonus_subtitle": "Spin and win"
+          }
+        };
+        
+        // установки языка
+        function setLanguage(lang) {
+          document.querySelector('.land__header-item-title').textContent = translations[lang].bonus_title;
+          document.querySelector('.land__header-item-desc').textContent = translations[lang].bonus_subtitle;
+        }
+            
+        // Инициализация аниматора
+        FrameAnimator.initAll();
+        
+        setLanguage('ru');
+
+      </script>
+</body>
+</html>

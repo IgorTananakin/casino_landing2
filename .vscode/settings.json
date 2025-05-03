@@ -1,0 +1,19 @@
+{
+    "liveSassCompile.settings.formats": [
+      {
+        "format": "expanded",
+        "extensionName": ".css",
+        "savePath": "/styles",
+        "savePathReplacementPairs": null
+      }
+    ],
+    "liveSassCompile.settings.excludeList": [
+      "**/variables/**",
+      "**/components/**",
+      "**/layout/**",
+      "**/fonts/**",
+      "**/reset/**"
+    ],
+    "liveSassCompile.settings.generateMap": true,
+    "liveSassCompile.settings.autoprefix": ["> 1%", "last 2 versions"]
+  }
