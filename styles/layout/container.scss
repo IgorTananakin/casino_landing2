@@ -350,7 +350,7 @@
   
     @media (max-width: 768px) {
       width: 15%;
-      padding-bottom: 15px;
+      padding-bottom: 5px;
     }
   }
   
@@ -597,5 +597,13 @@
   }
   .loaded .land__panda_img {
     transform: scale(4.4) translateX(0);
+  }
+}
+@media (-webkit-device-pixel-ratio: 3) and (max-width: 400px) {
+  .land__header .land__header-main-item{
+    margin-top: 30px;
+  }
+  .land__main_section {
+      height: 63%;
   }
 }
