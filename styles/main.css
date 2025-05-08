@@ -152,7 +152,7 @@ select {
 }
 @media (max-width: 400px) {
   .land__header-item-title {
-    font-size: 25px;
+    font-size: 24px;
   }
 }
 
@@ -377,8 +377,8 @@ select {
 }
 @media (max-width: 480px) {
   .loaded .land__header-left-item {
-    -webkit-transform: scale(2.6) translateX(0);
-            transform: scale(2.6) translateX(0);
+    -webkit-transform: scale(1.6) translateX(0);
+            transform: scale(1.6) translateX(0);
   }
   .loaded .land__header-right-item {
     -webkit-transform: scale(3.4) translateX(0);
@@ -446,17 +446,19 @@ select {
      object-fit: contain;
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
+  -webkit-transform: scale(1.5);
+          transform: scale(1.5);
 }
 @media (max-width: 1000px) {
   .frame-animation {
-    margin-bottom: 10%;
+    margin-bottom: 7%;
   }
 }
 @media (max-width: 850px) {
   .frame-animation {
-    margin-bottom: 15%;
-    -webkit-transform: scale(1.1);
-            transform: scale(1.1);
+    margin-bottom: 4%;
+    -webkit-transform: scale(1.5);
+            transform: scale(1.5);
   }
 }
 @media (max-width: 650px) {
@@ -467,22 +469,22 @@ select {
 }
 @media (max-width: 550px) {
   .frame-animation {
-    -webkit-transform: scale(1.8);
-            transform: scale(1.8);
-    margin-bottom: 30%;
+    -webkit-transform: scale(1.5);
+            transform: scale(1.5);
+    margin-bottom: 7%;
   }
 }
 @media (max-width: 450px) {
   .frame-animation {
-    -webkit-transform: scale(2.1);
-            transform: scale(2.1);
-    margin-bottom: 40%;
+    -webkit-transform: scale(1.7);
+            transform: scale(1.7);
+    margin-bottom: 7%;
   }
 }
 @media (max-width: 400px) {
   .frame-animation {
-    -webkit-transform: scale(2.6);
-            transform: scale(2.6);
+    -webkit-transform: scale(1.8);
+            transform: scale(1.8);
   }
 }
 
@@ -696,7 +698,7 @@ select {
 }
 @media (max-width: 850px) {
   .land__header .land__header-main-item {
-    margin-top: 55px;
+    margin-top: 10px;
   }
 }
 .land__btn_sing_up {
