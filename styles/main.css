@@ -207,10 +207,12 @@ select {
   .land__btn_sing_up {
     margin-right: 5px;
     padding: 5px 10px;
+    white-space: nowrap;
   }
   .land__btn_reg {
     margin-right: 5px;
     padding: 5px 10px;
+    white-space: nowrap;
   }
 }
 .slide-from-left {
@@ -794,8 +796,8 @@ select {
             transform: scale(4.55) translateX(-100%);
   }
   .loaded .land__header-left-item:not(.land__panda_img) {
-    -webkit-transform: scale(4.55) translateX(0);
-            transform: scale(4.55) translateX(0);
+    -webkit-transform: scale(3.55) translateX(0);
+            transform: scale(3.55) translateX(0);
   }
   .land__panda_img {
     -webkit-transform: scale(2.4) translateX(-100%);

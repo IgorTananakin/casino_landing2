@@ -49,20 +49,32 @@
         
         // переводы
         const translations = {
-          "ru": {
-            "bonus_title": "Бонус до 100% на депозит",
-            "bonus_subtitle": "Крути и выигрывай"
-          },
-          "en": {
-            "bonus_title": "100% deposit bonus",
-            "bonus_subtitle": "Spin and win"
-          }
-        };
+            "ru": {
+                "bonus_title": "Бонус до 100% на депозит",
+                "bonus_subtitle": "Крути и выигрывай",
+                "login": "Вход",
+                "registration": "Регистрация"
+            },
+            "en": {
+                "bonus_title": "100% deposit bonus",
+                "bonus_subtitle": "Spin and win",
+                "login": "Login",
+                "registration": "Sign Up" 
+            },
+            "tr": {
+                "bonus_title": "Depozito üzerine %100 bonus",
+                "bonus_subtitle": "Döndür ve kazan",
+                "login": "Giriş",
+                "registration": "Kayıt Ol" 
+            }
+        }
         
         // установки языка
         function setLanguage(lang) {
           document.querySelector('.land__header-item-title').textContent = translations[lang].bonus_title;
           document.querySelector('.land__header-item-desc').textContent = translations[lang].bonus_subtitle;
+          document.querySelector('.land__btn_sing_up').textContent = translations[lang].login;
+          document.querySelector('.land__btn_reg').textContent = translations[lang].registration;
         }
             
         // Инициализация аниматора
