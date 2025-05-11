@@ -263,7 +263,7 @@ right: 15%;
       transform: scale(1.6) translateX(0);
   }
   .loaded .land__header-right-item{
-      transform: scale(3.4) translateX(0); 
+      transform: scale(3.4) translateX(10px); 
   }
 }
 @media (max-width: 370px) {
@@ -596,7 +596,7 @@ transform: scale(1.2) translateX(0);
   transform: scale(4.55) translateX(-100%);
 }
 .loaded .land__header-left-item:not(.land__panda_img) {
-  transform: scale(3.55) translateX(0); 
+  transform: scale(3.55) translateX(-10px); 
 }
 
 .land__panda_img {
