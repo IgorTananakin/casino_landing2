@@ -53,8 +53,11 @@
     font-size: 28px; 
   }
   @media (max-width: 900px) {
-      font-size: 36px; 
+      font-size: 32px; 
       }
+  @media (max-width: 800px) {
+    font-size: 36px; 
+    }
   @media (max-width: 768px) {
     font-size: 32px; 
   }
@@ -469,6 +472,7 @@ right: 15%;
 .land__header-logo-item {
   max-width: 80%;
   margin-left: 0;
+  left: 0;
 }
 
 /* Анимация после загрузки */

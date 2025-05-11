@@ -671,6 +671,7 @@ select {
   .land__header-logo-item {
     max-width: 80%;
     margin-left: 0;
+    left: 0;
   }
   /* Анимация после загрузки */
   .loaded .land__animate_header_1,
