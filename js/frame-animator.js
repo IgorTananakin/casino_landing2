@@ -13,7 +13,6 @@ class FrameAnimator {
       this.fps = options.fps || 24;
       this.loop = options.loop !== false;
       this.autoplay = options.autoplay !== false;
-      this.debug = options.debug || false;
       this.playOnce = options.playOnce || false;
   
       this.images = new Array(this.frameCount).fill(null);
@@ -26,17 +25,9 @@ class FrameAnimator {
       this.scale = 1;
       this.hasPlayed = false;
       this.loadedCount = 0;
-      this.isLoading = false;
-      this.loadStartTime = 0;
-  
-      // Прогресс-бар
-      this.progressBar = this.createProgressBar();
-      this.canvas.parentNode.appendChild(this.progressBar);
   
       this.init();
     }
-  
-    // ========== Методы загрузки ========== //
   
     async init() {
       try {
@@ -46,48 +37,35 @@ class FrameAnimator {
         this.setupResizeObserver();
         this.updateCanvasSize();
   
-        // Начинаем загрузку всех кадров
-        this.isLoading = true;
-        this.loadStartTime = performance.now();
         await this.loadAllFrames();
-        this.isLoading = false;
   
-        // Показываем статистику загрузки
-        const loadTime = (performance.now() - this.loadStartTime).toFixed(0);
-        console.log(`Все кадры загружены за ${loadTime}ms`);
-  
-        // Удаляем прогресс-бар
-        this.progressBar.remove();
-  
-        // Автовоспроизведение
         if (this.autoplay) this.play();
+  
+        setTimeout(() => {
+          document.body.classList.add('loaded');
+        }, 500);
+  
       } catch (err) {
-        this.error('Ошибка инициализации:', err.message);
+        console.error('Ошибка инициализации:', err);
+        document.body.classList.add('loaded');
       }
     }
   
     async loadAllFrames() {
-      const batchSize = 45; // Загружаем по 4 кадра за раз
-      const totalBatches = Math.ceil(this.frameCount / batchSize);
-  
-      for (let batch = 0; batch < totalBatches; batch++) {
-        const start = batch * batchSize + 1;
-        const end = Math.min((batch + 1) * batchSize, this.frameCount);
+      const batchSize = 45;
+      
+      for (let i = 1; i <= this.frameCount; i += batchSize) {
+        const end = Math.min(i + batchSize - 1, this.frameCount);
+        const frameNumbers = Array.from({length: end - i + 1}, (_, idx) => i + idx);
         
         await Promise.all(
-          Array.from({length: end - start + 1}, (_, i) => 
-            this.loadFrame(start + i)
-          )
+          frameNumbers.map(frameNum => this.loadFrame(frameNum))
         );
-        
-        // Обновляем прогресс-бар
-        this.updateProgress((batch + 1) / totalBatches);
       }
     }
   
     async loadFrame(frameNum) {
       if (this.images[frameNum - 1]) return;
-  
       const img = await this.loadImage(frameNum);
       this.images[frameNum - 1] = img;
       this.loadedCount++;
@@ -95,57 +73,16 @@ class FrameAnimator {
     }
   
     loadImage(frameNum) {
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve) => {
         const img = new Image();
         img.src = this.getFramePath(frameNum);
-        
-        img.onload = () => {
-          if (this.debug) {
-            console.log(`Загружен кадр ${frameNum}`);
-          }
-          resolve(img);
-        };
-        
-        img.onerror = () => {
-          reject(new Error(`Ошибка загрузки кадра ${frameNum}`));
-        };
+        img.onload = () => resolve(img);
+        img.onerror = () => resolve(null);
       });
     }
   
-    // ========== Прогресс-бар ========== //
-  
-    createProgressBar() {
-      const bar = document.createElement('div');
-      bar.style.position = 'absolute';
-      bar.style.bottom = '0';
-      bar.style.left = '0';
-      bar.style.width = '100%';
-      bar.style.height = '4px';
-      bar.style.backgroundColor = 'rgba(255,255,255,0.2)';
-      
-      const progress = document.createElement('div');
-      progress.style.height = '100%';
-      progress.style.width = '0%';
-      progress.style.backgroundColor = '#fff';
-      progress.style.transition = 'width 0.3s ease';
-      progress.id = `${this.prefix}-progress`;
-      
-      bar.appendChild(progress);
-      return bar;
-    }
-  
-    updateProgress(percent) {
-      const progress = this.progressBar.querySelector('div');
-      if (progress) {
-        progress.style.width = `${percent * 100}%`;
-      }
-    }
-  
-    // ========== Методы анимации ========== //
-  
     play() {
-      if (this.isPlaying || this.hasError || this.isLoading) return;
-      
+      if (this.isPlaying || this.hasError) return;
       this.currentFrame = 0;
       this.hasPlayed = false;
       this.isPlaying = true;
@@ -154,7 +91,7 @@ class FrameAnimator {
     }
   
     playFromFrame(startFrame) {
-      if (this.isPlaying || this.hasError || this.isLoading) return;
+      if (this.isPlaying || this.hasError) return;
       
       startFrame = Math.max(0, Math.min(startFrame, this.frameCount - 1));
       this.currentFrame = startFrame;
@@ -164,23 +101,10 @@ class FrameAnimator {
       this.animationId = requestAnimationFrame(this.animate.bind(this));
     }
   
-    stop() {
-      this.isPlaying = false;
-      if (this.animationId) {
-        cancelAnimationFrame(this.animationId);
-      }
-    }
-  
     animate(timestamp) {
       if (!this.isPlaying) return;
       
-      if (this.playOnce && this.hasPlayed) {
-        this.stop();
-        return;
-      }
-      
       const delta = timestamp - this.lastTime;
-      
       if (delta > 1000 / this.fps) {
         this.renderFrame();
         this.lastTime = timestamp - (delta % (1000 / this.fps));
@@ -194,7 +118,9 @@ class FrameAnimator {
         }
       }
       
-      this.animationId = requestAnimationFrame(this.animate.bind(this));
+      if (!this.playOnce || !this.hasPlayed) {
+        this.animationId = requestAnimationFrame(this.animate.bind(this));
+      }
     }
   
     renderFrame() {
@@ -212,21 +138,22 @@ class FrameAnimator {
           0, 0, this.originalWidth, this.originalHeight,
           0, 0, this.canvas.width, this.canvas.height
         );
-        
       } catch (err) {
         this.stop();
       }
     }
   
-    // ========== Вспомогательные методы ========== //
-  
-    normalizePath(path) {
-      return path.endsWith('/') ? path : path + '/';
+    stop() {
+      this.isPlaying = false;
+      if (this.animationId) {
+        cancelAnimationFrame(this.animationId);
+      }
     }
   
+    normalizePath(path) { return path.endsWith('/') ? path : path + '/'; }
+    
     getFramePath(index) {
-      const frameNum = index.toString().padStart(this.digits, '0');
-      return `${this.imagePath}${this.prefix}/${this.prefix}${frameNum}.webp`;
+      return `${this.imagePath}${this.prefix}/${this.prefix}${index.toString().padStart(this.digits, '0')}.webp`;
     }
   
     setupResizeObserver() {
@@ -234,14 +161,7 @@ class FrameAnimator {
         window.addEventListener('resize', () => this.handleResize());
         return;
       }
-  
-      this.resizeObserver = new ResizeObserver(entries => {
-        for (let entry of entries) {
-          if (entry.target === this.canvas.parentElement) {
-            this.handleResize();
-          }
-        }
-      });
+      this.resizeObserver = new ResizeObserver(() => this.handleResize());
       this.resizeObserver.observe(this.canvas.parentElement);
     }
   
@@ -253,50 +173,38 @@ class FrameAnimator {
   
     updateCanvasSize() {
       const container = this.canvas.parentElement;
-      const containerWidth = container.clientWidth;
-      const containerHeight = container.clientHeight;
-      
-      const widthRatio = containerWidth / this.originalWidth;
-      const heightRatio = containerHeight / this.originalHeight;
+      const widthRatio = container.clientWidth / this.originalWidth;
+      const heightRatio = container.clientHeight / this.originalHeight;
       this.scale = Math.min(widthRatio, heightRatio);
-      
       this.canvas.width = this.originalWidth * this.scale;
       this.canvas.height = this.originalHeight * this.scale;
-    }
-  
-    error(...args) {
-      console.error(`[${this.prefix}]`, ...args);
-      this.hasError = true;
     }
   
     static initAll() {
       document.querySelectorAll('.frame-animation').forEach(canvas => {
         try {
-          const options = {
+          const animator = new FrameAnimator({
             canvas: canvas,
             prefix: canvas.dataset.frames,
             frameCount: parseInt(canvas.dataset.count),
-            imagePath: canvas.dataset.path || './media/imgOpt/',
+            imagePath: canvas.dataset.path,
             digits: parseInt(canvas.dataset.digits) || 3,
             fps: parseInt(canvas.dataset.fps) || 24,
             loop: canvas.dataset.loop !== 'false',
             autoplay: canvas.dataset.autoplay !== 'false',
-            debug: canvas.dataset.debug === 'true',
             playOnce: canvas.dataset.playOnce === 'true',
-          };
-          
-          const animator = new FrameAnimator(options);
-          
+          });
+  
           const parentBlock = canvas.closest('.land__animate_2');
           if (parentBlock) {
             parentBlock.addEventListener('click', () => {
               if (animator.isPlaying) {
                 animator.stop();
               }
-              animator.playFromFrame(28);
+              animator.playFromFrame(28); // Запуск с 29 кадра (индекс 28)
             });
           }
-          
+  
         } catch (err) {
           console.error('Ошибка инициализации анимации:', err);
         }
@@ -304,8 +212,6 @@ class FrameAnimator {
     }
   }
   
-  // Инициализация с задержкой для CSS-анимаций
-  setTimeout(() => {
+  window.addEventListener('load', () => {
     FrameAnimator.initAll();
-    document.body.classList.add('loaded');
-  }, 100);
+  });
