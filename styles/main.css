@@ -453,8 +453,12 @@ select {
      object-fit: contain;
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
-  -webkit-transform: scale(1.2);
-          transform: scale(1.2);
+}
+@media (min-width: 768px) {
+  .frame-animation {
+    -webkit-transform: scale(1.2);
+            transform: scale(1.2);
+  }
 }
 @media (max-width: 1000px) {
   .frame-animation {
@@ -464,37 +468,18 @@ select {
 @media (max-width: 850px) {
   .frame-animation {
     margin-bottom: 4%;
-    -webkit-transform: scale(1.1);
-            transform: scale(1.1);
-  }
-}
-@media (max-width: 650px) {
-  .frame-animation {
-    -webkit-transform: scale(1.2);
-            transform: scale(1.2);
   }
 }
 @media (max-width: 550px) {
   .frame-animation {
-    -webkit-transform: scale(1.1);
-            transform: scale(1.1);
     margin-bottom: 7%;
   }
 }
 @media (max-width: 450px) {
   .frame-animation {
-    -webkit-transform: scale(1.3);
-            transform: scale(1.3);
     margin-bottom: 7%;
   }
 }
-@media (max-width: 400px) {
-  .frame-animation {
-    -webkit-transform: scale(1.4);
-            transform: scale(1.4);
-  }
-}
-
 .land__animate_1,
 .land__animate_3 {
   position: absolute;
@@ -821,4 +806,4 @@ select {
   .land__main_section {
     height: 63%;
   }
-}
+}/*# sourceMappingURL=main.css.map */

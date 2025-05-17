@@ -124,24 +124,28 @@ class FrameAnimator {
     }
   
     renderFrame() {
-      try {
-        if (!this.playOnce || !this.hasPlayed || this.loop) {
-          this.currentFrame = (this.currentFrame + 1) % this.frameCount;
+        try {
+          if (!this.playOnce || !this.hasPlayed || this.loop) {
+            this.currentFrame = (this.currentFrame + 1) % this.frameCount;
+          }
+          
+          const img = this.images[this.currentFrame];
+          if (!img) return;
+          
+          // Очищаем canvas с учетом DPR
+          this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+          
+          // Рисуем изображение с учетом масштаба
+          this.ctx.drawImage(
+            img, 
+            0, 0, this.originalWidth, this.originalHeight,
+            0, 0, this.originalWidth * this.scale, this.originalHeight * this.scale
+          );
+        } catch (err) {
+          console.error('Render error:', err);
+          this.stop();
         }
-        
-        const img = this.images[this.currentFrame];
-        if (!img) return;
-        
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-        this.ctx.drawImage(
-          img, 
-          0, 0, this.originalWidth, this.originalHeight,
-          0, 0, this.canvas.width, this.canvas.height
-        );
-      } catch (err) {
-        this.stop();
       }
-    }
   
     stop() {
       this.isPlaying = false;
@@ -172,13 +176,30 @@ class FrameAnimator {
     }
   
     updateCanvasSize() {
-      const container = this.canvas.parentElement;
-      const widthRatio = container.clientWidth / this.originalWidth;
-      const heightRatio = container.clientHeight / this.originalHeight;
-      this.scale = Math.min(widthRatio, heightRatio);
-      this.canvas.width = this.originalWidth * this.scale;
-      this.canvas.height = this.originalHeight * this.scale;
-    }
+        const container = this.canvas.parentElement;
+        const widthRatio = container.clientWidth / this.originalWidth;
+        const heightRatio = container.clientHeight / this.originalHeight;
+        this.scale = Math.min(widthRatio, heightRatio);
+        
+        const dpr = window.devicePixelRatio || 1;
+        
+        // Устанавливаем реальные размеры canvas (с учетом DPR)
+        this.canvas.width = Math.floor(this.originalWidth * this.scale * dpr);
+        this.canvas.height = Math.floor(this.originalHeight * this.scale * dpr);
+        
+        // Устанавливаем отображаемые размеры (CSS)
+        this.canvas.style.width = `${this.originalWidth * this.scale}px`;
+        this.canvas.style.height = `${this.originalHeight * this.scale}px`;
+        
+        // Сбрасываем трансформации контекста
+        this.ctx.setTransform(1, 0, 0, 1, 0, 0);
+        this.ctx.scale(dpr, dpr);
+        
+        // Немедленная перерисовка
+        if (this.images[this.currentFrame]) {
+          this.renderFrame();
+        }
+      }
   
     static initAll() {
       document.querySelectorAll('.frame-animation').forEach(canvas => {
