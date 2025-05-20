@@ -10,7 +10,7 @@ class FrameAnimator {
       this.frameCount = options.frameCount;
       this.imagePath = this.normalizePath(options.imagePath || './media/imgOpt/');
       this.digits = options.digits || 3;
-      this.fps = options.fps || 24;
+      this.fps = options.fps || 54;
       this.loop = options.loop !== false;
       this.autoplay = options.autoplay !== false;
       this.playOnce = options.playOnce || false;
@@ -210,7 +210,7 @@ class FrameAnimator {
             frameCount: parseInt(canvas.dataset.count),
             imagePath: canvas.dataset.path,
             digits: parseInt(canvas.dataset.digits) || 3,
-            fps: parseInt(canvas.dataset.fps) || 24,
+            fps: parseInt(canvas.dataset.fps) || 54,
             loop: canvas.dataset.loop !== 'false',
             autoplay: canvas.dataset.autoplay !== 'false',
             playOnce: canvas.dataset.playOnce === 'true',
